@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %} 
+{% block title %}{% endblock %} 
+{% block body %}
+{% include 'navbar.html.twig' %}
+ <div class="example-wrapper">
+<h1>Liste des produits</h1>
+  <table class="table">
+        <thead>
+            <tr>
+
+                <th>Name</th>
+                <th>Referance</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Image</th>
+                <th>Quantity</th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td> {{ article.name }}</td>
+                <td> {{ article.referance }}</td>
+                <td> {{ article.description }}</td>
+                <td>{{ article.prix }} DT</td>
+                <td><img src="images/{{ article.image }}" style="width:100px"></td>
+                <td>Quantity: {{ cart[article.id] }}</td>
+                <td><a href="add/{{article.id}}" class="btn btn-primary">Add</a></td>
+                <td><a href="{{ path('app_delete', { 'id': article.id }) }}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+
+           </tbody>
+    </table>
+    <h2>Total Price: {{ totalPrice }} DT</h2>    
+    <p><a href="store" >Go Back</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+index:
+    path: /
+    controller: App\Controller\IndexController::index
+cart:
+    path: /cart
+    controller: App\Controller\CartController::index
+app_add:
+    path: /add/{id}
+    controller: App\Controller\CartController::add

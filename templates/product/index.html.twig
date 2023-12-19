@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+{% include 'navbar.html.twig' %}
+    <div class="container">
+    <h1>Product index</h1>
+
+    <form class="mb-3" method="GET">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Search by name" value="{{ app.request.query.get('search') }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Reference</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.referance }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.prix }}</td>
+                <td>
+                    {% if product.image %}
+                        <img src="{{ asset('images/' ~ product.image) }}" alt="Product Image" style="width:100px">
+                    {% else %}
+                        No image
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('edit', {'id': product.id}) }}"class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+    <a href="{{ path('app_product_new') }}" class="btn btn-success">Create new</a>
+{% endblock %}
+
